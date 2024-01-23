@@ -1,6 +1,8 @@
 import 'package:course_weather_forecast/commons/enum.dart';
 import 'package:course_weather_forecast/features/pick_place/presentation/cubit/city_cubit.dart';
 import 'package:course_weather_forecast/features/pick_place/presentation/page/pick_place_page.dart';
+import 'package:course_weather_forecast/features/weather/presentation/bloc/current_weather_bloc.dart';
+import 'package:course_weather_forecast/features/weather/presentation/page/current_weather_page.dart';
 import 'package:course_weather_forecast/injection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,6 +24,7 @@ class MainApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => locator<CityCubit>()),
+        BlocProvider(create: (context) => locator<CurrentWeatherBloc>()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -33,8 +36,8 @@ class MainApp extends StatelessWidget {
             )),
         initialRoute: '/',
         routes: {
-          '/': (context) => const PickPlacePage(),
-          AppRoute.pickPlace.name: (context) => const Scaffold(),
+          '/': (context) => const CurrentWeatherPage(),
+          AppRoute.pickPlace.name: (context) => const PickPlacePage(),
           AppRoute.hourlyForecast.name: (context) => const Scaffold(),
         },
       ),
