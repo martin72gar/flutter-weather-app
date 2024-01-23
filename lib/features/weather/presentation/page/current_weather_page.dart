@@ -137,16 +137,36 @@ class _CurrentWeatherPageState extends State<CurrentWeatherPage> {
           debugPrint('assetPath: $assetPath');
         }
 
-        if (state is CurrentWeatherFailure) {
-          debugPrint("message failure: ${state.message}");
-        }
-
         return Image.asset(assetPath, fit: BoxFit.cover);
       },
     );
   }
 
   Widget foreground() {
-    return DView.nothing();
+    return BlocBuilder<CurrentWeatherBloc, CurrentWeatherState>(
+      builder: (context, state) {
+        if (state is CurrentWeatherLoading) {
+          return DView.loadingCircle();
+        }
+
+        if (state is CurrentWeatherFailure) {
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              DView.error(data: state.message),
+              IconButton.filledTonal(
+                  onPressed: () {
+                    refresh();
+                  },
+                  icon: const Icon(
+                    Icons.refresh,
+                    color: Colors.white,
+                  )),
+            ],
+          );
+        }
+        return Container();
+      },
+    );
   }
 }

@@ -19,7 +19,7 @@ class WeatherRepositoryImpl implements WeatherRepository {
       final result = await remoteDataSource.getCurrentWeather(cityName);
       return Right(result.toEntity);
     } on NotFoundException {
-      return const Left(NotFoundFailure('Not found'));
+      return Left(NotFoundFailure('Weather not found for $cityName'));
     } on ServerException {
       return const Left(ServerFailure('Server error'));
     } on SocketException {
