@@ -30,40 +30,52 @@ class _CurrentWeatherPageState extends State<CurrentWeatherPage> {
 
   @override
   Widget build(BuildContext context) {
+    double titleStatsFontSize = 12; // Base font size
+    if (MediaQuery.of(context).size.width < 600) {
+      // Adjust threshold as needed
+      titleStatsFontSize = 10; // Smaller font for smaller screens
+    }
+
     return Scaffold(
       body: Stack(
         children: [
+          //background
           Positioned.fill(
             child: background(),
           ),
+          //background shadow top
           SizedBox(
             height: MediaQuery.of(context).size.height / 8,
             width: double.infinity,
-            child: BasicShadow(
+            child: const BasicShadow(
               topDown: true,
             ),
           ),
+          //background shadow bottom
           Align(
             alignment: Alignment.bottomCenter,
             child: SizedBox(
               height: MediaQuery.of(context).size.height / 2,
               width: double.infinity,
-              child: BasicShadow(
+              child: const BasicShadow(
                 topDown: false,
               ),
             ),
           ),
+          // foreground
           Column(
             children: [
+              // header
               Padding(
                 padding: const EdgeInsets.only(left: 20, top: 50, right: 20),
                 child: headerAction(),
               ),
+              // main menu
+              Expanded(
+                child: foreground(titleStatsFontSize),
+              )
             ],
           ),
-          Expanded(
-            child: foreground(),
-          )
         ],
       ),
     );
@@ -146,7 +158,7 @@ class _CurrentWeatherPageState extends State<CurrentWeatherPage> {
     );
   }
 
-  Widget foreground() {
+  Widget foreground(double titleStatsFontSize) {
     return BlocBuilder<CurrentWeatherBloc, CurrentWeatherState>(
       builder: (context, state) {
         if (state is CurrentWeatherLoading) {
@@ -155,6 +167,7 @@ class _CurrentWeatherPageState extends State<CurrentWeatherPage> {
 
         if (state is CurrentWeatherFailure) {
           return Column(
+            key: const Key('part_error'),
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               DView.error(data: state.message),
@@ -174,6 +187,7 @@ class _CurrentWeatherPageState extends State<CurrentWeatherPage> {
         if (state is CurrentWeatherLoaded) {
           final weather = state.data;
           return Padding(
+            key: const Key('weather_loaded'),
             padding: const EdgeInsets.all(30),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -209,6 +223,7 @@ class _CurrentWeatherPageState extends State<CurrentWeatherPage> {
                   ),
                 ),
                 ExtendedImage.network(URLs.weatherIcon(weather.icon)),
+                // Image.network(URLs.weatherIcon(weather.icon)),
                 Text(
                   weather.description.capitalize,
                   style: const TextStyle(
@@ -265,22 +280,23 @@ class _CurrentWeatherPageState extends State<CurrentWeatherPage> {
                       mainAxisSpacing: 8,
                       crossAxisSpacing: 8),
                   children: [
-                    itemStats(
+                    itemStats(titleStatsFontSize,
                         icon: Icons.thermostat,
                         title: 'Temperature',
-                        data: '${weather.temperature}\u2103'),
-                    itemStats(
+                        data:
+                            '${(weather.temperature - 273.15).round()}\u2103'),
+                    itemStats(titleStatsFontSize,
                         icon: Icons.air,
                         title: 'Wind',
                         data: '${weather.wind}m/s'),
-                    itemStats(
+                    itemStats(titleStatsFontSize,
                         icon: Icons.compare_arrows,
                         title: 'Pressure',
                         data: '${NumberFormat.currency(
                           decimalDigits: 0,
                           symbol: '',
                         ).format(weather.pressure)}hPa'),
-                    itemStats(
+                    itemStats(titleStatsFontSize,
                         icon: Icons.water_drop_outlined,
                         title: 'Humidity',
                         data: '${weather.humidity}%'),
@@ -290,12 +306,13 @@ class _CurrentWeatherPageState extends State<CurrentWeatherPage> {
             ),
           );
         }
-        return DView.nothing();
+        return Container();
       },
     );
   }
 
-  Widget itemStats({
+  Widget itemStats(
+    double titleStatsFontSize, {
     required IconData icon,
     required String title,
     required String data,
@@ -319,8 +336,8 @@ class _CurrentWeatherPageState extends State<CurrentWeatherPage> {
           children: [
             Text(
               title,
-              style: const TextStyle(
-                fontSize: 12,
+              style: TextStyle(
+                fontSize: titleStatsFontSize,
                 color: Colors.white70,
               ),
             ),
