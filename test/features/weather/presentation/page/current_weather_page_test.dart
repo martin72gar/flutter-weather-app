@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:bloc_test/bloc_test.dart';
 import 'package:course_weather_forecast/features/weather/presentation/bloc/current_weather_bloc.dart';
 import 'package:course_weather_forecast/features/weather/presentation/page/current_weather_page.dart';

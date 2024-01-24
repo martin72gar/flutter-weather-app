@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:course_weather_forecast/core/error/exception.dart';
@@ -18,6 +17,7 @@ class WeatherRepositoryImpl implements WeatherRepository {
       String cityName) async {
     try {
       final result = await remoteDataSource.getCurrentWeather(cityName);
+
       return Right(result.toEntity);
     } on NotFoundException {
       return Left(NotFoundFailure('Weather not found for $cityName'));

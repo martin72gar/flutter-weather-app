@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:course_weather_forecast/api/key.dart';
 import 'package:course_weather_forecast/api/urls.dart';

@@ -11,7 +11,7 @@ class BasicShadow extends StatelessWidget {
         gradient: LinearGradient(
             begin: topDown ? Alignment.topCenter : Alignment.bottomCenter,
             end: topDown ? Alignment.bottomCenter : Alignment.topCenter,
-            colors: [Colors.black87, Colors.transparent]),
+            colors: const [Colors.black87, Colors.transparent]),
       ),
     );
   }
