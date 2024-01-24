@@ -4,4 +4,6 @@ import 'package:dartz/dartz.dart';
 
 abstract class WeatherRepository {
   Future<Either<Failure, WeatherEntity>> getCurrentWeather(String cityName);
+  Future<Either<Failure, List<WeatherEntity>>> getHourlyForecast(
+      String cityName);
 }

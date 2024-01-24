@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:course_weather_forecast/core/error/exception.dart';
@@ -18,6 +19,24 @@ class WeatherRepositoryImpl implements WeatherRepository {
     try {
       final result = await remoteDataSource.getCurrentWeather(cityName);
       return Right(result.toEntity);
+    } on NotFoundException {
+      return Left(NotFoundFailure('Weather not found for $cityName'));
+    } on ServerException {
+      return const Left(ServerFailure('Server error'));
+    } on SocketException {
+      return const Left(ConnectionFailure('Failed connect to the network'));
+    } catch (e) {
+      debugPrint('Someting failure: $e');
+      return const Left(SomethingFailure('Something wrong occurred'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<WeatherEntity>>> getHourlyForecast(
+      String cityName) async {
+    try {
+      final result = await remoteDataSource.getHourlyForecast(cityName);
+      return Right(result);
     } on NotFoundException {
       return Left(NotFoundFailure('Weather not found for $cityName'));
     } on ServerException {

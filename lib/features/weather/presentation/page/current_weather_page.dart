@@ -193,7 +193,7 @@ class _CurrentWeatherPageState extends State<CurrentWeatherPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  weather.cityName,
+                  weather.cityName ?? '',
                   style: const TextStyle(
                     fontSize: 30,
                     color: Colors.white,

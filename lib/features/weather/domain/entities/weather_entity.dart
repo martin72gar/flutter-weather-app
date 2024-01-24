@@ -11,7 +11,7 @@ class WeatherEntity extends Equatable {
   final num humidity;
   final num wind;
   final DateTime dateTime;
-  final String cityName;
+  final String? cityName;
 
   const WeatherEntity({
     required this.id,
@@ -27,7 +27,7 @@ class WeatherEntity extends Equatable {
   });
 
   @override
-  List<Object> get props {
+  List<Object?> get props {
     return [
       id,
       main,

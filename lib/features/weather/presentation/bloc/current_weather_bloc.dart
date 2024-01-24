@@ -1,7 +1,7 @@
 import 'package:course_weather_forecast/commons/app_session.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:course_weather_forecast/features/pick_place/get_current_weather_use_case.dart';
+import 'package:course_weather_forecast/features/weather/domain/get_current_weather_use_case.dart';
 import 'package:course_weather_forecast/features/weather/domain/entities/weather_entity.dart';
 import 'package:equatable/equatable.dart';
 

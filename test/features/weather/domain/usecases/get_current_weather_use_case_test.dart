@@ -1,5 +1,5 @@
 import 'package:course_weather_forecast/core/error/failure.dart';
-import 'package:course_weather_forecast/features/pick_place/get_current_weather_use_case.dart';
+import 'package:course_weather_forecast/features/weather/domain/get_current_weather_use_case.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';

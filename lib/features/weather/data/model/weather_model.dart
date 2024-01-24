@@ -24,7 +24,7 @@ class WeatherModel extends WeatherEntity {
         humidity: json['main']['humidity'],
         wind: json['wind']['speed'],
         dateTime: DateTime.fromMillisecondsSinceEpoch(json['dt'] * 1000),
-        cityName: json['name']);
+        cityName: json['name'] ?? '');
   }
 
   Map<String, dynamic> toJson() => {

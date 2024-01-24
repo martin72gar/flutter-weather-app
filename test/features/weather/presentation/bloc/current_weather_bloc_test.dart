@@ -1,6 +1,6 @@
 import 'package:course_weather_forecast/commons/app_session.dart';
 import 'package:course_weather_forecast/core/error/failure.dart';
-import 'package:course_weather_forecast/features/pick_place/get_current_weather_use_case.dart';
+import 'package:course_weather_forecast/features/weather/domain/get_current_weather_use_case.dart';
 import 'package:course_weather_forecast/features/weather/presentation/bloc/current_weather_bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
