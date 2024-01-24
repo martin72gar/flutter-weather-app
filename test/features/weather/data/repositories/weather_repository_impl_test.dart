@@ -58,7 +58,7 @@ void main() {
       verify(
         () => mockWeatherRemoteDataSource.getCurrentWeather(tCityName),
       );
-      expect(result, const Left(NotFoundFailure('Not found')));
+      expect(result, const Left(NotFoundFailure()));
     },
   );
 

@@ -18,7 +18,7 @@ class WeatherRemoteDataSourceImpl implements WeatherRemoteDataSource {
 
   @override
   Future<WeatherModel> getCurrentWeather(String cityName) async {
-    String countryCode = 'ID';
+    String countryCode = 'IT';
     Uri uri = Uri.parse(
         '${URLs.baseURL}/weather?q=$cityName,$countryCode&appid=$apiKey');
 
@@ -36,7 +36,7 @@ class WeatherRemoteDataSourceImpl implements WeatherRemoteDataSource {
 
   @override
   Future<List<WeatherModel>> getHourlyForecast(String cityName) async {
-    String countryCode = 'ID';
+    String countryCode = 'IT';
     Uri uri = Uri.parse(
         '${URLs.baseURL}/forecast?q=$cityName,$countryCode&appid=$apiKey');
 
